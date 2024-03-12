@@ -1,13 +1,13 @@
 import { test as base } from "@playwright/test";
-import { DemoBlazePage } from "../pageObjects/demoBlazePage";
+import { HomePage } from "../pageObjects/homePage";
 
 type MyFixtures = {
-  demoBlazePage: DemoBlazePage;
+  homePage: HomePage;
 };
 
 export const test = base.extend<MyFixtures>({
-  demoBlazePage: async ({ page }, use) => {
-    const demoBlazePage = new DemoBlazePage(page);
-    await use(demoBlazePage);
+  homePage: async ({ page }, use) => {
+    const homePage = new HomePage(page);
+    await use(homePage);
   },
 });
