@@ -1,15 +1,21 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/myFixtures";
+import { NavigationBar, Routes } from "./demoBlaze.module";
 
 test.describe("Demo Blaze tests", () => {
-  test("should return on home page after clicking on logo", async ({ page, homePage }) => {
+  test.beforeEach(async ({ homePage }) => {
     await homePage.navigate();
+  });
 
-    const navigation = await homePage.header.navigation();
+  test("should return on home page when clicking on logo", async ({ page, homePage }) => {
+    await homePage.header.clickOnLogo();
 
-    await navigation[1].click();
-    await page.waitForTimeout(2000);
+    await expect(page).toHaveURL(Routes.HomePage);
+  });
 
-    expect(1).toBe(1);
+  test("should return on home page when clicking on Home page in navigation bar", async ({ page, homePage }) => {
+    await homePage.header.navigationMenu(NavigationBar.Home);
+
+    await expect(page).toHaveURL(Routes.HomePage);
   });
 });

@@ -1,12 +1,11 @@
 import { Page } from "@playwright/test";
-import { Header } from "./header";
+import { BasePage } from "./basePage";
 
-export class HomePage {
+export class HomePage extends BasePage {
   private readonly path: string = "/";
-  public readonly header: Header;
 
-  public constructor(private readonly page: Page) {
-    this.header = new Header(page);
+  public constructor(protected readonly page: Page) {
+    super(page);
   }
 
   public async navigate(): Promise<void> {
