@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/myFixtures";
-import { NavigationBar, Routes } from "./demoBlaze.module";
+import { Routes } from "./data/routes";
+import { NavigationBar } from "../pageObjects/header";
 
 test.describe("Demo Blaze tests", () => {
   test.beforeEach(async ({ homePage }) => {

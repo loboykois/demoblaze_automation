@@ -1,5 +1,14 @@
 import { Locator, Page } from "@playwright/test";
 
+export enum NavigationBar {
+  Home = "Home",
+  Contact = "Contact",
+  AboutUs = "About us",
+  Cart = "Cart",
+  LogIn = "Log in",
+  SignUp = "Sign up",
+}
+
 export class Header {
   private readonly navbar: Locator;
 
