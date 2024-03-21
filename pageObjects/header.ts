@@ -9,6 +9,12 @@ export enum NavigationBar {
   SignUp = "Sign up",
 }
 
+export enum ModalType {
+  Signup = "#signInModal",
+}
+
+const modalLinksMap = new Map([[ModalType.Signup, NavigationBar.SignUp]]);
+
 export class Header {
   private readonly navbar: Locator;
 
@@ -32,19 +38,25 @@ export class Header {
 
   public async showAboutUsPopup(): Promise<void> {
     await this.navigationMenu(NavigationBar.AboutUs);
-    const aboutUsPopup = this.page.locator("#videoModal");
+    const aboutUsPopup = this.page.locator("#videoModal").first();
     await aboutUsPopup.waitFor({ state: "visible" });
   }
 
   public async showLoginPopup(): Promise<void> {
     await this.navigationMenu(NavigationBar.LogIn);
-    const loginPopup = this.page.locator("#logInModal");
+    const loginPopup = this.page.locator("#logInModal").first();
     await loginPopup.waitFor({ state: "visible" });
   }
 
-  public async showSignUpPopup(): Promise<void> {
+  public async showSignupPopup(): Promise<void> {
     await this.navigationMenu(NavigationBar.SignUp);
-    const signInPopup = this.page.locator("#signInModal");
+    const signInPopup = this.page.locator("#signInModal").first();
+    await signInPopup.waitFor({ state: "visible" });
+  }
+
+  public async showModal(modalType: ModalType): Promise<void> {
+    await this.navigationMenu(modalLinksMap.get(modalType)!);
+    const signInPopup = this.page.locator(modalType);
     await signInPopup.waitFor({ state: "visible" });
   }
 }
