@@ -67,7 +67,7 @@ test.describe("Demo Blaze tests", () => {
   ];
 
   for (const modalItem of modalTestCases) {
-    test(`111 - should open ${modalItem.modalType} when user clicks in navigation`, async ({ page, homePage }) => {
+    test(`Loop - should open ${modalItem.modalType} when user clicks in navigation`, async ({ page, homePage }) => {
       await homePage.header[`show${modalItem.modalType}Popup`]();
 
       const modalWindow = page.locator(modalItem.locator);

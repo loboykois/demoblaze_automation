@@ -10,10 +10,10 @@ export enum NavigationBar {
 }
 
 export enum ModalType {
-  Signup = "#signInModal",
+  SignUp = "#signInModal",
 }
 
-const modalLinksMap = new Map([[ModalType.Signup, NavigationBar.SignUp]]);
+const modalLinksMap = new Map([[ModalType.SignUp, NavigationBar.SignUp]]);
 
 export class Header {
   private readonly navbar: Locator;
