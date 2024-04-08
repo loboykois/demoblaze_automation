@@ -1,7 +1,7 @@
 import { Locator } from "@playwright/test";
 
 export class ProductCard {
-  protected readonly cardLocator: Locator;
+  private readonly cardLocator: Locator;
 
   public constructor(cardLocator: Locator) {
     this.cardLocator = cardLocator;
