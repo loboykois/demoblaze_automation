@@ -1,12 +1,18 @@
-import { Locator } from "@playwright/test";
-import { ProductCard } from "./productCard";
+import { Locator, Page } from "@playwright/test";
+import { BasePage } from "../basePage";
 
-export class ProductDetails extends ProductCard {
-  public constructor(protected readonly cardLocator: Locator) {
-    super(cardLocator);
+export class ProductDetails extends BasePage {
+  private readonly details: Locator;
+  protected get path(): string {
+    return "/**";
+  }
+
+  public constructor(protected readonly page: Page) {
+    super(page);
+    this.details = this.page.locator(".product-deatil");
   }
 
   public async addToCart(): Promise<void> {
-    await this.cardLocator.getByRole("link", { name: "Add to cart" }).click();
+    await this.details.getByRole("link", { name: "Add to cart" }).click();
   }
 }

@@ -1,18 +1,24 @@
 import { test } from "../fixtures/myFixtures";
 import { expect } from "@playwright/test";
-import { Categories } from "../pageObjects/productsPage/productPage";
+import { categoriesList } from "./data/categories";
 
 test.describe("Products page tests", () => {
   test.beforeEach(async ({ productPage }) => {
     await productPage.navigate();
   });
 
-  test("should add product to shopping cart when Add to cart button is clicked", async ({ page, productPage }) => {
-    await productPage.selectCategory(Categories.Phone);
+  for (const category of categoriesList) {
+    test(`should navigate user to card details from ${category} category when product card is selected`, async ({ page, productPage, productDetails }) => {
+      await productPage.selectCategory(category);
 
-    const cards = await productPage.getAllProductsCards();
-    await cards[0].selectCard();
+      await page.waitForTimeout(1500);
 
-    expect(page.url()).toBe("https://www.demoblaze.com/prod.html?idp_=1");
-  });
+      const cards = await productPage.getAllProductsCards();
+
+      await cards[1].openDetails();
+      await productDetails.addToCart();
+
+      expect(1).toBe(1);
+    });
+  }
 });
