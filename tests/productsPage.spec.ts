@@ -25,13 +25,23 @@ test.describe("Products page tests", () => {
 
       const cartItems = await cartPage.getAllProductsItems();
       expect(cartItems.length > 0).toBeTruthy();
+    });
+  }
 
-      // await cartItems[0].deleteCartItem();
-      // await page.waitForTimeout(1500);
+  for (const category of categoriesList) {
+    test(`should redirect to product details page when user clicked on product card in ${category}`, async ({ page, productPage }) => {
+      await productPage.selectCategory(category);
+      await page.waitForTimeout(1500);
 
-      // const totalPrice = await cartPage.getTotalPrice();
+      const cards = await productPage.getAllProductsCards();
 
-      // expect(totalPrice).toBeFalsy();
+      for (let i = 0; i < cards.length; i++) {
+        await cards[i].openDetails();
+        await expect(page).toHaveURL(new RegExp(`${Routes.ProductDetailsPage}?(.*)$`));
+        await page.goBack();
+        await productPage.selectCategory(category);
+        await page.waitForTimeout(1500);
+      }
     });
   }
 });
